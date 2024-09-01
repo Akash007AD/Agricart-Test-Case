@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razorpay Payment Button</title>
+    <style>
+        #rzp-button1 {
+            background-color: #3399cc;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #rzp-button1:hover {
+            background-color: #2878a4;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="rzp-button1">Pay</button>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        var options = {
+            "key": "rzp_test_PEqlIXg8AAxogq", 
+            "amount": "50000", 
+            "currency": "INR",
+            "name": "Acme Corp", 
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo", 
+            "order_id": "order_OqnBJRHcfZfgns",
+            "handler": function (response){
+                alert("Payment Successful");
+            },
+            "prefill": {
+                "name": "Sandeep Sharma",
+                "email": "sandeep@gmail.com",
+                "contact": "8567345632"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+
+        var rzp1 = new Razorpay(options);
+
+        document.getElementById('rzp-button1').onclick = function(e){
+            rzp1.open();
+            e.preventDefault();
+        }
+        var settings = {
+    "url": "/api/payment/verify",
+    "method": "POST",
+    "timeout": 0,
+    "headers": {
+     "Content-Type": "application/json"
+    },
+    "data": JSON.stringify({response}),
+  }
+    </script>
+
+
+</body>
+</html>
